@@ -1,0 +1,16 @@
+node_modules/
+dist/
+dist-server/
+release/
+data/
+test-results/
+*.log
+evidence/
+output/
+.env
+.env.*
+!.env.example
+*.sqlite*
+*.db
+*.pem
+*.key

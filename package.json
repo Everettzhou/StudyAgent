@@ -1,0 +1,81 @@
+{
+  "name": "study-agent",
+  "version": "0.1.11",
+  "private": true,
+  "description": "知序 · 本地学习智能体",
+  "author": "StudyAgent",
+  "main": "dist-server/desktop.cjs",
+  "scripts": {
+    "build": "tsc --noEmit && vite build && node scripts/build.mjs",
+    "test": "node scripts/test.mjs",
+    "start": "electron .",
+    "serve": "node dist-server/cli.cjs",
+    "package": "npm run build && electron-builder --win nsis --x64",
+    "test:ui": "node scripts/ui-smoke.mjs"
+  },
+  "dependencies": {
+    "@tesseract.js-data/chi_sim": "^1.0.0",
+    "@tesseract.js-data/eng": "^1.0.0",
+    "fast-xml-parser": "^5.0.0",
+    "fflate": "^0.8.2",
+    "ipaddr.js": "^2.2.0",
+    "katex": "0.16.47",
+    "lucide-react": "^0.468.0",
+    "node-forge": "^1.3.1",
+    "pdfjs-dist": "^5.4.0",
+    "qrcode": "^1.5.4",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-markdown": "^10.1.0",
+    "rehype-katex": "^7.0.1",
+    "remark-math": "^6.0.0",
+    "tesseract.js": "^6.0.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.56.0",
+    "@types/node": "^22.0.0",
+    "@types/node-forge": "^1.3.11",
+    "@types/qrcode": "^1.5.5",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "@vitejs/plugin-react": "^4.4.0",
+    "electron": "44.7.0",
+    "electron-builder": "^26.0.0",
+    "esbuild": "^0.25.0",
+    "typescript": "^5.9.0",
+    "vite": "^6.3.0"
+  },
+  "build": {
+    "appId": "local.zhixu.studyagent",
+    "productName": "知序学习助手",
+    "directories": {
+      "output": "release/0.1.11"
+    },
+    "files": [
+      "dist/**/*",
+      "dist-server/**/*",
+      "package.json"
+    ],
+    "npmRebuild": false,
+    "asarUnpack": [
+      "node_modules/tesseract.js/**",
+      "node_modules/tesseract.js-core/**",
+      "node_modules/@tesseract.js-data/**"
+    ],
+    "win": {
+      "target": [
+        "nsis"
+      ],
+      "signExecutable": false,
+      "icon": "build/icon.ico"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "deleteAppDataOnUninstall": false,
+      "createDesktopShortcut": true
+    },
+    "artifactName": "StudyAgent-Setup-${version}.${ext}",
+    "electronDist": "node_modules/electron/dist"
+  }
+}
